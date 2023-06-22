@@ -2,6 +2,9 @@ package com.springproject.employee.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.DigestUtils;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,14 +26,31 @@ public class UserController {
 	}
 	
 	@PostMapping("/login")
-	public String postLogin(@ModelAttribute User user) {
-		User usr= userService.login(user.getUsername(),user.getPassword());
+	public String postLogin(@ModelAttribute User user, Model model) {
 		
-		if(usr!= null) {
+		user.setPassword(DigestUtils.md5DigestAsHex(user.getPassword().getBytes()));
+		User  usr = userService.login(user.getUsername(), user.getPassword());
+		
+		if(usr != null) {
+			model.addAttribute("user",usr);	
 			return "Home";
-		
 		}
-		return "LoginForm";
-		
+		model.addAttribute("message","user not found!!");
+		return  "LoginForm";	
 	}
+	
+	
+	@GetMapping("/signup")
+	public String getSignUp() {
+		return "SignUpForm";
+	}
+	
+	@PostMapping("/signup")
+	public String postSignUp(@ModelAttribute User user){
+		
+		user.setPassword(DigestUtils.md5DigestAsHex(user.getPassword().getBytes()));
+		userService.signup(user);
+		return "LoginForm";
+	}
+	
 }
