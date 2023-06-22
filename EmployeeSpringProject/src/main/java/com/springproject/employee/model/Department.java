@@ -19,3 +19,4 @@ public class Department {
 	private String dpt_head;
 	private String dpt_phone;
 }
+
