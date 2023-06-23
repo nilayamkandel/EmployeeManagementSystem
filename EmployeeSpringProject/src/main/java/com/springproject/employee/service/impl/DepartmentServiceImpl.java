@@ -3,11 +3,12 @@ package com.springproject.employee.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.springproject.employee.model.Department;
 import com.springproject.employee.repository.DepartmentRepository;
 import com.springproject.employee.service.IDepartmentService;
-
+@Service
 public class DepartmentServiceImpl implements IDepartmentService{
 	
 	@Autowired
