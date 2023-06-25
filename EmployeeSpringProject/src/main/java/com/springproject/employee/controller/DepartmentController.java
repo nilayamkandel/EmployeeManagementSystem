@@ -53,11 +53,19 @@ public class DepartmentController {
 		return "DepartmentEditForm";
 	}
 	
+	@GetMapping("/view")
+	public String view(@RequestParam int id, Model model) {
+		model.addAttribute("DeptObject",deptService.getDeptById(id));
+		
+		return "DepartmentViewForm";
+	}
+	
 	@PostMapping("/update")
 	public String update(@ModelAttribute Department dept) {
 		deptService.updateDept(dept);
 		return "redirect:/department/list";
 	}
+	
 	
 	
 	
