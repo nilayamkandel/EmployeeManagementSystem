@@ -29,12 +29,12 @@ public class EmployeeServiceImpl implements IEmployeeService {
 	}
 
 	@Override
-	public void deltEmployee(int id) {
+	public void deltEmployee(Long id) {
 		emplRepo.deleteById(id);
 	}
 
 	@Override
-	public Employee getEmployeeById(int id) {
+	public Employee getEmployeeById(Long id) {
 		
 		return emplRepo.findById(id).get();
 	}
