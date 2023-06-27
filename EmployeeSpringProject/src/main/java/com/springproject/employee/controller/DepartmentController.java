@@ -23,13 +23,11 @@ public class DepartmentController {
 	
 	@GetMapping("/add")
 	public String getDepartment() {
-		
 		return "DepartmentForm";
 	}
 	
 	@PostMapping("/add")
 	public String postDepartment(@ModelAttribute Department dept ) {
-		
 		deptService.addDept(dept);
 		return "DepartmentForm";
 	}
@@ -52,19 +50,18 @@ public class DepartmentController {
 		
 		return "DepartmentEditForm";
 	}
-	
-	@GetMapping("/view")
-	public String view(@RequestParam int id, Model model) {
-		model.addAttribute("DeptObject",deptService.getDeptById(id));
-		
-		return "DepartmentViewForm";
-	}
-	
 	@PostMapping("/update")
 	public String update(@ModelAttribute Department dept) {
 		deptService.updateDept(dept);
 		return "redirect:/department/list";
 	}
+		
+	@GetMapping("/view")
+	public String view(@RequestParam int id, Model model) {
+		model.addAttribute("DeptObject",deptService.getDeptById(id));	
+		return "DepartmentViewForm";
+	}
+	
 	
 	
 	
