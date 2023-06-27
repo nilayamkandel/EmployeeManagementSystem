@@ -29,8 +29,9 @@ public class Employee {
 	private String lname;
 	private String gender;
 	private String phone;
+	private String email;
 	private String company;
-	private String post;
+	private String post; 
 	private int Salary;
 	
 	@DateTimeFormat(iso=ISO.DATE)
