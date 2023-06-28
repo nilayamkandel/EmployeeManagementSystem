@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Employee list</title>
+
+</head>
+<body>
+<th:block th:insert="Header.html"></th:block>	
+	<div class="container-fluid">
+		<div class="card">
+			<div class="card-header text-center bg-primary text-white"><h5>Employee List</h5></div>
+				<div class="card-body">
+					<table class="table table-stripted">
+					
+						<thead>
+							<tr>
+								<th>Employee First Name</th>
+								<th>Employee Last Name</th>
+								
+								<th>Phone</th>
+								
+								<th>Company</th>
+								
+								<th>city</th>
+								
+								<th>Action</th>
+							</tr>
+						</thead>
+						
+						<tbody>
+							<tr th:each="e: ${emplList}">
+								<td>[[${e.fname}]]</td>
+								<td>[[${e.lname}]]</td>
+								
+								<td>[[${e.phone}]]</td>
+								
+								<td>[[${e.company}]]</td>
+									
+								<td>[[${e.address.city}]]</td>
+								
+								<th>
+									<a th:href="@{/employee/edit(id=${e.id})}"><input type="submit" value="Edit" class="btn btn-success btn-sm"></a>
+									<a th:href="@{/employee/delete(id=${e.id})}"><input type="submit" value="Delete" class="btn btn-danger btn-sm"></a>
+									<a th:href="@{/employee/view(id=${e.id})}"><input type="submit" value="View" class="btn btn-primary btn-sm"></a>
+								</th>
+							</tr>
+							
+						</tbody>
+					
+					</table>
+				
+			</div>
+		</div>
+		
+	</div>
+	
+	
+</body>
+</html>
