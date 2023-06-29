@@ -46,7 +46,7 @@
         
       </ul>
       <form class="d-flex" action="/user/logout">
-        <h6 style="color:yellow" th:if="${user != null}">Welcome : [[${user.fname}]] </h6> &nbsp; &nbsp;
+        <h6 style="color:yellow" th:if="${session.validuser != null}">Welcome : [[${session.validuser.fname}]] </h6> &nbsp; &nbsp;
         <button class ="btn btn-danger btn-sm" type="submit">Logout</button>
       </form>
     </div>
