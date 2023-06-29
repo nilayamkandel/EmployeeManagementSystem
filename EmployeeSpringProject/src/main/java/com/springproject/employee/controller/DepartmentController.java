@@ -1,5 +1,7 @@
 package com.springproject.employee.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +24,11 @@ public class DepartmentController {
 	private IDepartmentService deptService;
 	
 	@GetMapping("/add")
-	public String getDepartment() {
+	public String getDepartment(HttpSession session) {
+		if(session.getAttribute("validuser")== null) {
+			return "LoginForm";
+		}
+		
 		return "DepartmentForm";
 	}
 	
@@ -33,31 +39,47 @@ public class DepartmentController {
 	}
 	
 	@GetMapping("/list")
-	public String deptList(Model model) {
+	public String deptList(HttpSession session, Model model) {
+		if(session.getAttribute("validuser")== null) {
+			return "LoginForm";
+		}
+		
 		model.addAttribute("deptList",deptService.getAllDepts());
 		return "DepartmentListForm";
 	}
 	
 	@GetMapping("/delete")
-	public String delete(@RequestParam int id) {
+	public String delete(@RequestParam int id, HttpSession session) {
+		if(session.getAttribute("validuser")== null) {
+			return "LoginForm";
+		}
+		
 		deptService.deleteDept(id);
 		return "redirect:/department/list";
 	}
 	
 	@GetMapping("/edit")
-	public String edit(@RequestParam int id, Model model) {
+	public String edit(@RequestParam int id, Model model,HttpSession session) {
+		if(session.getAttribute("validuser")== null) {
+			return "LoginForm";
+		}
+		
 		model.addAttribute("DeptObject",deptService.getDeptById(id));
 		
 		return "DepartmentEditForm";
 	}
 	@PostMapping("/update")
 	public String update(@ModelAttribute Department dept) {
+		
 		deptService.updateDept(dept);
 		return "redirect:/department/list";
 	}
 		
 	@GetMapping("/view")
-	public String view(@RequestParam int id, Model model) {
+	public String view(@RequestParam int id, Model model,  HttpSession session) {
+		if(session.getAttribute("validuser")== null) {
+			return "LoginForm";
+		}
 		model.addAttribute("DeptObject",deptService.getDeptById(id));	
 		return "DepartmentViewForm";
 	}
