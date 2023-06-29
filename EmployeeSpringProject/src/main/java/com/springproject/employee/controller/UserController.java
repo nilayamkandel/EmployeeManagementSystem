@@ -1,5 +1,9 @@
 package com.springproject.employee.controller;
 
+
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,13 +30,16 @@ public class UserController {
 	}
 	
 	@PostMapping("/login")
-	public String postLogin(@ModelAttribute User user, Model model) {
+	public String postLogin(@ModelAttribute User user, Model model, HttpSession session) {
 		
 		user.setPassword(DigestUtils.md5DigestAsHex(user.getPassword().getBytes()));
 		User  usr = userService.login(user.getUsername(), user.getPassword());
 		
 		if(usr != null) {
-			model.addAttribute("user",usr);	
+			
+			session.setAttribute("validuser",usr);
+			session.setMaxInactiveInterval(300);
+			//model.addAttribute("user",usr);	
 			return "Home";
 		}
 		model.addAttribute("message","user not found!!");
@@ -54,7 +61,8 @@ public class UserController {
 	}
 	
 	@GetMapping("/logout")
-	public String logout() {
+	public String logout(HttpSession session) {
+		session.invalidate(); //to kill session after logout
 		return "LoginForm";
 	}
 	
