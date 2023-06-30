@@ -1,5 +1,7 @@
 package com.springproject.employee.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +27,10 @@ public class EmployeeController {
 	private IDepartmentService deptService;
 
 	@GetMapping("/add")
-	public String getEmployee(Model model) {
+	public String getEmployee(HttpSession session, Model model) {
+		if(session.getAttribute("validuser")== null) {
+			return "LoginForm";
+		}
 		model.addAttribute("deptList",deptService.getAllDepts());
 		return "EmployeeForm";
 	}
@@ -38,13 +43,19 @@ public class EmployeeController {
 	
 	//inside department list we contain edit, delete and view. inside edit there is update option
 	@GetMapping("/list")
-	public String getEmployeeList(Model model) {
+	public String getEmployeeList(HttpSession session, Model model) {
+		if(session.getAttribute("validuser")== null) {
+			return "LoginForm";
+		}
 		model.addAttribute("emplList", emplService.getAllEmployee());
 		return "EmployeeListForm";
 	}
 	
 	@GetMapping("/edit")
-	public String editEmployee(@RequestParam long id, Model model) {
+	public String editEmployee(@RequestParam long id, HttpSession session, Model model) {
+		if(session.getAttribute("validuser")== null) {
+			return "LoginForm";
+		}
 		model.addAttribute("empObject",emplService.getEmployeeById(id));
 		model.addAttribute("deptList",deptService.getAllDepts());
 		return "EmployeeEditForm";
