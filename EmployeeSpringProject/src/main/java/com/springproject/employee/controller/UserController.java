@@ -25,7 +25,11 @@ public class UserController {
 	private IUserService userService;
 	
 	@GetMapping("/login")
-	public String getLogin() {
+	public String getLogin(HttpSession session) {
+		if(session.getAttribute("validuser")== null) {
+			return "LoginForm";
+		}
+		
 		return "LoginForm";
 	}
 	
