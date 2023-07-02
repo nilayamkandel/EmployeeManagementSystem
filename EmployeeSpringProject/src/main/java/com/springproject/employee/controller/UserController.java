@@ -78,4 +78,9 @@ public class UserController {
 		return "LoginForm";
 	}
 	
+	@GetMapping("/profile")
+	public String getProfile() {
+		return "ProfileForm";
+	}
+	
 }
