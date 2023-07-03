@@ -10,10 +10,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.springproject.employee.model.Employee;
 import com.springproject.employee.service.IDepartmentService;
 import com.springproject.employee.service.IEmployeeService;
+import com.springproject.employee.utils.EmployeeExcelView;
+import com.springproject.employee.utils.EmployeePdfView;
 
 
 @Controller
@@ -78,6 +81,22 @@ public class EmployeeController {
 		model.addAttribute("deptList",deptService.getAllDepts());
 		model.addAttribute("empObject",emplService.getEmployeeById(id));
 		return "EmployeeViewForm";
+	}
+	
+	@GetMapping("/excel")
+	public ModelAndView excelView() {
+		ModelAndView mv = new ModelAndView();
+		mv.setView(new EmployeeExcelView());
+		mv.addObject("list", emplService.getAllEmployee());
+		return mv;
+	}
+	
+	@GetMapping("/pdf")
+	public ModelAndView pdfView() {
+		ModelAndView mv = new ModelAndView();
+		mv.setView(new EmployeePdfView());
+		mv.addObject("list", emplService.getAllEmployee());
+		return mv;
 	}
 	
 }
