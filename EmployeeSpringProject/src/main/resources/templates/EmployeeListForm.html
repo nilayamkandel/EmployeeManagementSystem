@@ -6,11 +6,21 @@
 
 </head>
 <body>
-<th:block th:insert="Header.html"></th:block>	
+<th:block th:insert="Header.html"></th:block>
+	
 	<div class="container-fluid">
+	
 		<div class="card">
+		
 			<div class="card-header text-center bg-primary text-white"><h5>Employee List</h5></div>
+
 				<div class="card-body">
+				
+				<a href= "/employee/excel"><input type="submit" value="Excel" class="btn btn-success btn"></a>
+				<br>
+				<br>
+				
+				<a href= "/employee/pdf"><input type="submit" value="Pdf" class="btn btn-success btn"></a>
 					<table class="table table-stripted">
 					
 						<thead>
