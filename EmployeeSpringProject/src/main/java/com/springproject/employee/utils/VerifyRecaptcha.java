@@ -1,7 +1,14 @@
 package com.springproject.employee.utils;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.StringReader;
+import java.net.URL;
 
+
+import javax.net.ssl.HttpsURLConnection;
 public class VerifyRecaptcha {
 	
 	public static final String url = "https://www.google.com/recaptcha/api/siteverify";
@@ -16,7 +23,7 @@ public class VerifyRecaptcha {
 			URL  obj = new URL(url);
 			HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
 
-			// add reuqest header
+			// add request header
 			con.setRequestMethod("POST");
 			con.setRequestProperty("User-Agent", USER_AGENT);
 			con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
@@ -48,7 +55,7 @@ public class VerifyRecaptcha {
 			System.out.println(response.toString());
 
 			// parse JSON response and return 'success' value
-			JsonReader jsonReader = Json.createReader(new StringReader(response.toString()));
+			jsonReader jsonReader = Json.createReader(new StringReader(response.toString()));		
 			JsonObject jsonObject = jsonReader.readObject();
 			jsonReader.close();
 
@@ -59,6 +66,7 @@ public class VerifyRecaptcha {
 		
 	}
 
+}
 }
 
 
