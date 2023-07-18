@@ -35,7 +35,7 @@ public class EmployeeController {
 			return "LoginForm";
 		}
 		model.addAttribute("deptList",deptService.getAllDepts());
-		return "EmployeeForm";
+		return "EmployeeAddForm";
 	}
 	
 	@PostMapping("/add")
