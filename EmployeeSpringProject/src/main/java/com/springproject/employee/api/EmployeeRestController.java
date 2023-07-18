@@ -33,7 +33,6 @@ public class EmployeeRestController {
 		return empService.getAllEmployee();
 	}
 	
-	
 	@GetMapping("/api/emp/{id}")
 	public Employee getOneEmp(@PathVariable Long id) {
 		return empService.getEmployeeById(id);
